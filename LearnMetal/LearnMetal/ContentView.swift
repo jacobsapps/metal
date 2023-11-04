@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
-        VStack {
+        ZStack {
+//            Color.white
+//                .edgesIgnoringSafeArea(.all)
+//                .perlinNoiseShader()
+        
             Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+                .font(.system(size: 200))
+                .layerEffectShader(pixelSize: 10)
+            
+//            Text("Hello, world!")
+//                .font(.largeTitle)
+//                .fontWeight(.bold)
+//                .kerning(2)
+//                .foregroundStyle(.green)
+//                .distortionTimeShader()
         }
-        .padding()
     }
 }
 
