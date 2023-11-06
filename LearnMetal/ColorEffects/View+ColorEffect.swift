@@ -12,6 +12,10 @@ extension View {
     func colorShader() -> some View {
         modifier(ColorShader())
     }
+    
+    func sizeAwareColorShader() -> some View {
+        modifier(SizeAwareColorShader())
+    }
 }
 
 struct ColorShader: ViewModifier {
@@ -19,5 +23,17 @@ struct ColorShader: ViewModifier {
     func body(content: Content) -> some View {
         content
             .colorEffect(ShaderLibrary.color())
+    }
+}
+
+struct SizeAwareColorShader: ViewModifier {
+    
+    func body(content: Content) -> some View {
+        content.visualEffect { content, proxy in
+            content
+                .colorEffect(ShaderLibrary.sizeAwareColor(
+                    .float2(proxy.size)
+                ))
+        }
     }
 }
