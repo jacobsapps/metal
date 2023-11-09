@@ -36,5 +36,8 @@ half4 timeVaryingColor(
     float2 size,
     float time
 ) {
-    return half4(0.0, oscillate(2 * M_PI_F * position.x/size.x), 0.0, 1.0);
+    return half4(oscillate(2 * time + position.x/size.x),
+                 oscillate(4 * time + position.y/size.y),
+                 oscillate(-2 * time + position.x/size.y),
+                 1.0);
 }
