@@ -16,6 +16,10 @@ extension View {
     func sizeAwareColorShader() -> some View {
         modifier(SizeAwareColorShader())
     }
+    
+    func timeVaryingColorShader() -> some View {
+        modifier(TimeVaryingColorShader())
+    }
 }
 
 struct ColorShader: ViewModifier {
@@ -34,6 +38,23 @@ struct SizeAwareColorShader: ViewModifier {
                 .colorEffect(ShaderLibrary.sizeAwareColor(
                     .float2(proxy.size)
                 ))
+        }
+    }
+}
+
+struct TimeVaryingColorShader: ViewModifier {
+    
+    private let startDate = Date()
+    
+    func body(content: Content) -> some View {
+        TimelineView(.animation) { _ in
+            content.visualEffect { content, proxy in
+                content
+                    .colorEffect(ShaderLibrary.timeVaryingColor(
+                        .float2(proxy.size),
+                        .float(startDate.timeIntervalSinceNow)
+                    ))
+            }
         }
     }
 }
