@@ -10,9 +10,9 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-        Color.white
-            .edgesIgnoringSafeArea(.all)
-            .timeVaryingColorShader()
+        Image(systemName: "globe")
+            .font(.system(size: 200))
+            .distortionShader()
     }
 }
 
