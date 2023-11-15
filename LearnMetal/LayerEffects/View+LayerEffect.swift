@@ -9,18 +9,25 @@ import SwiftUI
 
 extension View {
     
-    func pixellationShader() -> some View {
-        modifier(PixellationShader())
+    func pixellationShader(pixelSize: Float = 8) -> some View {
+        modifier(PixellationShader(pixelSize: pixelSize))
     }
 }
 
 struct PixellationShader: ViewModifier {
     
+    let pixelSize: Float
+    let startDate = Date()
+    
     func body(content: Content) -> some View {
-        content
-            .layerEffect(
-                ShaderLibrary.pixellate(),
-                maxSampleOffset: .zero
-            )
+        TimelineView(.animation) { _ in
+            content
+                .layerEffect(
+                    ShaderLibrary.pixellate(
+                        .float(pixelSize),
+                        .float(startDate.timeIntervalSinceNow)
+                    ), maxSampleOffset: .zero
+                )
+        }
     }
 }
